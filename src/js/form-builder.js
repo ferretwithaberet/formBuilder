@@ -715,9 +715,9 @@ const FormBuilder = function(opts, element, $) {
    * @param  {Boolean} use value in values as value
    * @return {String} markup for number attribute
    */
-  const numberAttribute = (attribute, values, useValue = false) => {
+  const numberAttribute = (attribute, values, useValue = true) => {
     const { class: classname, className, value, ...attrs } = values
-    const attrVal = attrs[attribute] || useValue ? value : null
+    const attrVal = attrs[attribute] || (useValue ? value : null)
     const attrLabel = mi18n.get(attribute) || attribute
     const placeholder = mi18n.get(`placeholder.${attribute}`)
 
