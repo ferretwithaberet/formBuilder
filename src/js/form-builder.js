@@ -462,9 +462,8 @@ const FormBuilder = function(opts, element, $) {
     let key
     const roles = values.role !== undefined ? values.role.split(',') : []
     const numAttrs = ['min', 'max', 'step']
-
     numAttrs.forEach(numAttr => {
-      advFieldMap[numAttr] = () => numberAttribute(numAttr, values)
+      advFieldMap[numAttr] = () => numberAttribute(numAttr, values, false)
     })
 
     const noDisable = ['name', 'className']
@@ -713,11 +712,12 @@ const FormBuilder = function(opts, element, $) {
    * Add a number attribute to a field.
    * @param  {String} attribute
    * @param  {Object} values
+   * @param  {Boolean} use value in values as value
    * @return {String} markup for number attribute
    */
-  const numberAttribute = (attribute, values) => {
+  const numberAttribute = (attribute, values, useValue = false) => {
     const { class: classname, className, value, ...attrs } = values
-    const attrVal = attrs[attribute] || value
+    const attrVal = attrs[attribute] || useValue ? value : null
     const attrLabel = mi18n.get(attribute) || attribute
     const placeholder = mi18n.get(`placeholder.${attribute}`)
 
